@@ -1,5 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from 'react'
 import { useLenis } from 'lenis/react'
 
 function SkeletonBlock({ className }) {
@@ -15,22 +14,21 @@ export default function SkeletonLoader({ children }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShow(false)
-      requestAnimationFrame(() => {
-        lenis?.scrollTo(0, { immediate: true })
-      })
+      lenis?.scrollTo(0, { immediate: true })
     }, 1500)
     return () => clearTimeout(timer)
   }, [lenis])
 
   return (
-    <AnimatePresence mode="wait">
-      {show ? (
-        <motion.div
-          key="skeleton"
-          className="min-h-screen bg-[var(--color-cream)] p-6 lg:p-10 max-w-6xl mx-auto overflow-x-hidden"
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-        >
+    <div className="relative min-h-screen bg-[var(--color-cream)]">
+      {/* Content always mounted — correct layout from the start */}
+      <div style={{ opacity: show ? 0 : 1 }} className="transition-opacity duration-300">
+        {children}
+      </div>
+
+      {/* Skeleton overlay — disappears after 1.5s */}
+      {show && (
+        <div className="absolute inset-0 p-6 lg:p-10 max-w-6xl mx-auto overflow-x-hidden">
           {/* Nav skeleton */}
           <div className="flex items-center justify-between mb-12">
             <div className="flex items-center gap-2">
@@ -70,17 +68,8 @@ export default function SkeletonLoader({ children }) {
               <SkeletonBlock key={i} className="h-48" />
             ))}
           </div>
-        </motion.div>
-      ) : (
-        <motion.div
-          key="content"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4 }}
-        >
-          {children}
-        </motion.div>
+        </div>
       )}
-    </AnimatePresence>
+    </div>
   )
 }
