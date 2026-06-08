@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import Hero from '../sections/Hero'
 import Navbar from '../sections/Navbar'
+import FeaturesSection from '../sections/FeaturesSection'
 
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
@@ -16,45 +17,6 @@ const sectionHeader = (tag, title, desc) => (
     {desc && <p className="section-subtitle mx-auto">{desc}</p>}
   </motion.div>
 )
-
-const features = [
-  {
-    id: 'boards',
-    title: 'Boards',
-    desc: 'Powerful Kanban boards with drag & drop, premade templates, and smart intelligence that finds similar cards and auto-sorts them into the right lists.',
-    icon: 'M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2',
-  },
-  {
-    id: 'manager',
-    title: 'Nura Manager',
-    desc: 'Summary dashboard with real-time stats, hours timeline, and workload overview to track productivity at a glance.',
-    icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
-  },
-  {
-    id: 'members',
-    title: 'Members',
-    desc: 'Manage team members with custom roles and permissions. Track who does what, all locally on your machine.',
-    icon: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z',
-  },
-  {
-    id: 'schedule',
-    title: 'Schedule',
-    desc: 'Built-in calendar and date management for deadlines, milestones, and sprint planning — all offline.',
-    icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
-  },
-  {
-    id: 'agent',
-    title: 'Nura Agent',
-    desc: 'Four intelligent agents — Manager, Planner, Risk, Chronicler — that automate workload tracking, risk detection, and weekly reports.',
-    icon: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
-  },
-  {
-    id: 'chats',
-    title: 'Nura Chats',
-    desc: 'AI-powered chat to control your boards with natural language or slash commands. Works offline with Ollama + Gemma 4 E4B.',
-    icon: 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z',
-  },
-]
 
 const agents = [
   { name: 'Manager Agent', role: 'Manager', desc: 'Calculates member workload and highlights who is carrying the most load.', stat: 'Busiest: Haider (3.5)', color: 'bg-orange-100 text-orange-700' },
@@ -105,33 +67,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── Features ─── */}
-      <section id="features" className="py-24 px-6 scroll-mt-20">
-        <div className="max-w-6xl mx-auto">
-          {sectionHeader('Features', 'Everything You Need', 'From Kanban boards to AI-powered automation — Nura Manager brings everything to your desktop, fully offline.')}
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((feature, i) => (
-              <motion.div
-                key={feature.id}
-                className="feature-card"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-              >
-                <div className="w-11 h-11 rounded-xl bg-[var(--color-ginger)] flex items-center justify-center mb-4">
-                  <svg className="w-5 h-5 text-[var(--color-orange)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={feature.icon} />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-bold text-[var(--color-black)] mb-2">{feature.title}</h3>
-                <p className="text-sm text-[var(--color-text-light)] leading-relaxed">{feature.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FeaturesSection />
 
       {/* ─── Templates ─── */}
       <section className="py-24 px-6 bg-white">

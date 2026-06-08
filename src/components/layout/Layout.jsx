@@ -1,10 +1,13 @@
 import { Outlet } from 'react-router-dom'
+import SkeletonLoader from '../ui/SkeletonLoader'
 
 export default function Layout() {
   return (
     <div className="min-h-screen bg-[var(--color-cream)]">
       <main>
-        <Outlet />
+        <SkeletonLoader>
+          <Outlet />
+        </SkeletonLoader>
       </main>
       <footer className="border-t border-[var(--color-border)] bg-white">
         <div className="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
