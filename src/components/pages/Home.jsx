@@ -46,23 +46,26 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           {sectionHeader('Templates', 'Jumpstart Any Workflow', 'Pre-made Kanban templates for Scrum, Sales, Content, Bug Tracking, Personal Goals, or start from a blank board.')}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {templates.map((t, i) => (
-              <motion.div
-                key={t.name}
-                className="card"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.05 }}
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-bold text-[var(--color-black)]">{t.name}</h3>
-                  {t.lists > 0 && <span className="tag text-xs">{t.lists} lists</span>}
-                </div>
-                <p className="text-sm text-[var(--color-text-light)]">{t.desc}</p>
-              </motion.div>
-            ))}
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+            {templates.map((t, i) => {
+              const isWide = i === 0 || i === 3
+              return (
+                <motion.div
+                  key={t.name}
+                  className={`card ${isWide ? 'col-span-2 sm:col-span-1' : ''}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.05 }}
+                >
+                  <div className={`flex items-center justify-between mb-2 ${isWide ? 'sm:flex-row flex-row' : ''}`}>
+                    <h3 className={`font-bold text-[var(--color-black)] ${isWide ? 'text-base sm:text-sm' : 'text-sm'}`}>{t.name}</h3>
+                    {t.lists > 0 && <span className="tag text-xs shrink-0 ml-2">{t.lists} lists</span>}
+                  </div>
+                  <p className="text-xs sm:text-sm text-[var(--color-text-light)]">{t.desc}</p>
+                </motion.div>
+              )
+            })}
           </div>
         </div>
       </section>
