@@ -109,7 +109,7 @@ export default function ChatSimulation() {
           placeholder="Ask anything in plain English..."
           className="flex-1 bg-white border border-[var(--color-border)] rounded-lg px-4 py-2.5 text-sm outline-none focus:border-[var(--color-orange)] transition-colors"
         />
-        <button type="submit" className="btn-primary" disabled={typing}>
+        <button type="submit" className="rounded-lg font-semibold text-white text-sm py-2 px-4 sm:py-2.5 sm:px-5 transition-all duration-300 hover:-translate-y-0.5 shrink-0" style={{ background: 'var(--gradient-primary)' }} disabled={typing}>
           Send
         </button>
       </form>
