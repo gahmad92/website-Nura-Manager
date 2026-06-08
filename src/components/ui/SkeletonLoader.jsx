@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useLenis } from 'lenis/react'
 
 function SkeletonBlock({ className }) {
   return (
@@ -9,14 +10,17 @@ function SkeletonBlock({ className }) {
 
 export default function SkeletonLoader({ children }) {
   const [show, setShow] = useState(true)
+  const lenis = useLenis()
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShow(false)
-      window.scrollTo(0, 0)
+      requestAnimationFrame(() => {
+        lenis?.scrollTo(0, { immediate: true })
+      })
     }, 1500)
     return () => clearTimeout(timer)
-  }, [])
+  }, [lenis])
 
   return (
     <AnimatePresence mode="wait">

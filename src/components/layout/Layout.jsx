@@ -1,7 +1,14 @@
+import { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
+import { useLenis } from 'lenis/react'
 import SkeletonLoader from '../ui/SkeletonLoader'
 
 export default function Layout() {
+  const lenis = useLenis()
+
+  useEffect(() => {
+    lenis?.scrollTo(0, { immediate: true })
+  }, [lenis])
   return (
     <div className="min-h-screen bg-[var(--color-cream)]">
       <main>
