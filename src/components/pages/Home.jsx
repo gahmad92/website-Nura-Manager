@@ -49,7 +49,7 @@ export default function Home() {
             { number: '100%', label: 'Offline' },
             { number: '0', label: 'Accounts Needed' },
             { number: '4+', label: 'Intelligent Agents' },
-            { number: 'Free', label: 'Open Source' },
+            { number: 'Free', label: 'to use' },
           ].map((stat, i) => (
             <motion.div key={stat.label} {...fadeUp} transition={{ duration: 0.6, delay: i * 0.1 }}>
               <p className="stat-number gradient-text">{stat.number}</p>

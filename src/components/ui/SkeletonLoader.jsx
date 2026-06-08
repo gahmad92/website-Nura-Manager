@@ -20,7 +20,7 @@ export default function SkeletonLoader({ children }) {
       {show ? (
         <motion.div
           key="skeleton"
-          className="min-h-screen bg-[var(--color-cream)] p-6 lg:p-10 max-w-6xl mx-auto"
+          className="min-h-screen bg-[var(--color-cream)] p-6 lg:p-10 max-w-6xl mx-auto overflow-x-hidden"
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
         >
@@ -51,14 +51,14 @@ export default function SkeletonLoader({ children }) {
           </div>
 
           {/* Stats skeleton */}
-          <div className="grid grid-cols-4 gap-6 mt-20">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20">
             {[...Array(4)].map((_, i) => (
               <SkeletonBlock key={i} className="h-24" />
             ))}
           </div>
 
           {/* Features grid skeleton */}
-          <div className="grid grid-cols-3 gap-6 mt-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
             {[...Array(6)].map((_, i) => (
               <SkeletonBlock key={i} className="h-48" />
             ))}

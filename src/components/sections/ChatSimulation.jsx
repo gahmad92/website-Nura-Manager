@@ -1,5 +1,8 @@
-import { useState, useRef, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useRef, useEffect, useCallback, useMemo } from 'react'
+import { AnimatePresence } from 'framer-motion'
+import ChatMessage from '../chat/ChatMessage'
+import ChatTypingIndicator from '../chat/ChatTypingIndicator'
+import ChatQuickExamples from '../chat/ChatQuickExamples'
 
 const initialMessages = [
   { role: 'ai', text: "Hello! I'm your Nura Assistant. How can I help you manage your boards today?" },
@@ -30,9 +33,7 @@ const knowledge = {
 function findResponse(input) {
   for (const category of Object.values(knowledge)) {
     for (const entry of category) {
-      if (entry.q.test(input)) {
-        return entry.a
-      }
+      if (entry.q.test(input)) return entry.a
     }
   }
   const fallbacks = [
@@ -42,20 +43,6 @@ function findResponse(input) {
     `I couldn't find an answer for "${input.slice(0, 30)}..." Try something like:\n• "how many boards do we have?"\n• "who has the least work?"\n• "show progress for member Max"`,
   ]
   return fallbacks[Math.floor(Math.random() * fallbacks.length)]
-}
-
-function formatText(text) {
-  return text
-    .split('\n')
-    .map(line => {
-      const parts = line.split(/(\*[^*]+\*)/g)
-      return parts.map((part, i) =>
-        part.startsWith('*') && part.endsWith('*')
-          ? <strong key={i} className="font-semibold text-[var(--color-orange)]">{part.slice(1, -1)}</strong>
-          : part
-      )
-    })
-    .flatMap((line, i, arr) => i < arr.length - 1 ? [line, <br key={`br-${i}`} />] : [line])
 }
 
 export default function ChatSimulation() {
@@ -68,7 +55,7 @@ export default function ChatSimulation() {
     endRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, typing])
 
-  function handleSend(e) {
+  const handleSend = useCallback((e) => {
     e?.preventDefault()
     const text = input.trim()
     if (!text || typing) return
@@ -82,11 +69,13 @@ export default function ChatSimulation() {
       setMessages(m => [...m, { role: 'ai', text: reply }])
       setTyping(false)
     }, 600 + Math.random() * 500)
-  }
+  }, [input, typing])
 
-  function handleExampleClick(cmd) {
+  const handleExampleClick = useCallback((cmd) => {
     setInput(cmd)
-  }
+  }, [])
+
+  const messageList = useMemo(() => messages, [messages])
 
   return (
     <div className="card max-w-xl mx-auto mb-10">
@@ -103,59 +92,18 @@ export default function ChatSimulation() {
         <span className="ml-auto text-[10px] text-[var(--color-muted)] font-mono">v2.0</span>
       </div>
 
-      {/* Messages */}
-      <div className="space-y-4 mb-4 max-h-80 overflow-y-auto pr-1 scroll-smooth">
+      <div className="space-y-4 mb-4 max-h-[60vh] md:max-h-80 overflow-y-auto pr-1 scroll-smooth">
         <AnimatePresence initial={false}>
-          {messages.map((msg, i) => (
-            <motion.div
-              key={i}
-              className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : ''}`}
-              initial={{ opacity: 0, y: 12, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              {msg.role === 'ai' && (
-                <div className="w-8 h-8 rounded-full bg-[var(--color-ginger)] flex items-center justify-center shrink-0">
-                  <span className="text-xs font-bold text-[var(--color-orange)]">AI</span>
-                </div>
-              )}
-              <div
-                className={`px-4 py-3 max-w-[85%] text-sm leading-relaxed ${
-                  msg.role === 'ai'
-                    ? 'bg-[var(--color-ginger)] rounded-r-xl rounded-t-xl text-[var(--color-text)]'
-                    : 'bg-[var(--color-orange)]/10 rounded-l-xl rounded-t-xl text-[var(--color-text)]'
-                }`}
-              >
-                {typeof msg.text === 'string' ? formatText(msg.text) : msg.text}
-              </div>
-              {msg.role === 'user' && (
-                <div className="w-8 h-8 rounded-full gradient-bg flex items-center justify-center shrink-0">
-                  <span className="text-xs font-bold text-white">You</span>
-                </div>
-              )}
-            </motion.div>
+          {messageList.map((msg) => (
+            <ChatMessage key={msg.text + msg.role} msg={msg} />
           ))}
         </AnimatePresence>
 
-        {typing && (
-          <motion.div className="flex gap-3" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            <div className="w-8 h-8 rounded-full bg-[var(--color-ginger)] flex items-center justify-center shrink-0">
-              <span className="text-xs font-bold text-[var(--color-orange)]">AI</span>
-            </div>
-            <div className="bg-[var(--color-ginger)] rounded-r-xl rounded-t-xl px-4 py-3">
-              <div className="flex gap-1">
-                <span className="w-2 h-2 rounded-full bg-[var(--color-orange)]/40 animate-bounce" style={{ animationDelay: '0s' }} />
-                <span className="w-2 h-2 rounded-full bg-[var(--color-orange)]/40 animate-bounce" style={{ animationDelay: '0.15s' }} />
-                <span className="w-2 h-2 rounded-full bg-[var(--color-orange)]/40 animate-bounce" style={{ animationDelay: '0.3s' }} />
-              </div>
-            </div>
-          </motion.div>
-        )}
+        {typing && <ChatTypingIndicator />}
 
         <div ref={endRef} />
       </div>
 
-      {/* Input */}
       <form onSubmit={handleSend} className="flex gap-2">
         <input
           type="text"
@@ -169,18 +117,7 @@ export default function ChatSimulation() {
         </button>
       </form>
 
-      {/* Quick examples */}
-      <div className="flex flex-wrap gap-1.5 mt-3">
-        {['how many boards?', 'who has the least work?', 'best performing member?', 'show lists in board Launch'].map(cmd => (
-          <button
-            key={cmd}
-            onClick={() => handleExampleClick(cmd)}
-            className="text-[11px] px-2 py-1 rounded-full border border-[var(--color-border)] text-[var(--color-muted)] hover:text-[var(--color-orange)] hover:border-[var(--color-orange)] transition-colors"
-          >
-            {cmd}
-          </button>
-        ))}
-      </div>
+      <ChatQuickExamples onClick={handleExampleClick} />
     </div>
   )
 }
