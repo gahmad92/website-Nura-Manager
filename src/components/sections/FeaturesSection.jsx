@@ -14,7 +14,7 @@ const tabs = [
       'Labels, due dates, members & descriptions',
       'Pre-built templates to start fast',
     ],
-    screenshot: 'Board View',
+    screenshot: '/boards.png',
   },
   {
     id: 'dashboard',
@@ -28,7 +28,7 @@ const tabs = [
       'Busiest member identification',
       'Risk cards flagging & monitoring',
     ],
-    screenshot: 'Dashboard View',
+    screenshot: '/Nura-Manager.png',
   },
   {
     id: 'members',
@@ -42,7 +42,7 @@ const tabs = [
       'Assignment tracking across boards',
       'Auto-detect overloaded members',
     ],
-    screenshot: 'Members View',
+    screenshot: '/members.png',
   },
   {
     id: 'schedule',
@@ -56,7 +56,7 @@ const tabs = [
       'Overdue alerts with auto-routing',
       'Date-based filtering and sorting',
     ],
-    screenshot: 'Schedule View',
+    screenshot: '/Schedule.png',
   },
   {
     id: 'agent',
@@ -70,7 +70,7 @@ const tabs = [
       'Risk agent flags blockers early',
       'Chronicler generates weekly reports',
     ],
-    screenshot: 'Agent View',
+    screenshot: '/agents.png',
   },
   {
     id: 'chat',
@@ -84,7 +84,7 @@ const tabs = [
       'Runs on Ollama + Gemma 4 E4B locally',
       'No internet or API key required',
     ],
-    screenshot: 'Chat View',
+    screenshot: '/chat.png',
   },
 ]
 
@@ -205,20 +205,13 @@ export default function FeaturesSection() {
                   </span>
                 </div>
 
-                {/* Placeholder area */}
-                <div className="aspect-[16/10] flex flex-col items-center justify-center gap-4" style={{ background: 'var(--color-cream)' }}>
-                  <div
-                    className="w-16 h-16 rounded-2xl flex items-center justify-center"
-                    style={{ background: 'var(--color-ginger)', border: '1px solid var(--color-border)' }}
-                  >
-                    <svg className="w-8 h-8" style={{ color: 'var(--color-orange)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={active.icon} />
-                    </svg>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-sm font-semibold text-[var(--color-text)]">{active.screenshot}</p>
-                    <p className="text-xs text-[var(--color-muted)] mt-1">Replace with your app screenshot</p>
-                  </div>
+                {/* Screenshot */}
+                <div className="aspect-[16/10] bg-[var(--color-cream)]">
+                  <img
+                    src={active.screenshot}
+                    alt={`${active.title} screenshot`}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
             </div>

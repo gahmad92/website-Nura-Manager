@@ -34,8 +34,8 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-[var(--color-border)]">
       <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
         <a href="#" className="flex items-center gap-2 shrink-0">
-          <div className="w-7 h-7 rounded-lg gradient-bg flex items-center justify-center">
-            <span className="text-white font-bold text-xs">N</span>
+          <div className="w-9 h-9 rounded-xl bg-[var(--color-black)] flex items-center justify-center shadow-sm">
+            <span className="text-white font-bold text-sm tracking-tight">N</span>
           </div>
           <span className="font-bold text-sm text-[var(--color-black)] hidden sm:inline">Nura Manager</span>
         </a>

@@ -70,23 +70,14 @@ export default function Hero() {
                   <div className="w-3 h-3 rounded-full bg-red-400/70" />
                   <div className="w-3 h-3 rounded-full bg-yellow-400/70" />
                   <div className="w-3 h-3 rounded-full bg-green-400/70" />
-                  <span className="ml-3 text-xs text-gray-400 font-medium">Nura Manager — Board View</span>
+                  <span className="ml-3 text-xs text-gray-400 font-medium">Nura Manager — By Ghulam Haider Productions</span>
                 </div>
                 
-                {/* Screenshot placeholder */}
-                <div className="aspect-[16/10] bg-gradient-to-b from-white to-gray-50/50 flex flex-col items-center justify-center gap-5">
-                  <div className="w-20 h-20 rounded-2xl bg-[var(--color-ginger)]/10 flex items-center justify-center ring-1 ring-black/5">
-                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-gray-300">
-                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                      <circle cx="8.5" cy="8.5" r="1.5" />
-                      <polyline points="21 15 16 10 5 21" />
-                    </svg>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-sm font-medium text-gray-400">App Screenshot</p>
-                    <p className="text-xs text-gray-300 mt-1">Replace with your screenshot</p>
-                  </div>
-                </div>
+                <img
+                  src="/NURA_HERO_PICTURE.png"
+                  alt="Nura Manager app preview"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </motion.div>
