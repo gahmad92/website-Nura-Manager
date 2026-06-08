@@ -11,7 +11,10 @@ export default function SkeletonLoader({ children }) {
   const [show, setShow] = useState(true)
 
   useEffect(() => {
-    const timer = setTimeout(() => setShow(false), 1500)
+    const timer = setTimeout(() => {
+      setShow(false)
+      window.scrollTo(0, 0)
+    }, 1500)
     return () => clearTimeout(timer)
   }, [])
 

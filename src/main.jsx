@@ -5,6 +5,8 @@ import { ReactLenis } from 'lenis/react'
 import './index.css'
 import App from './App.jsx'
 
+history.scrollRestoration = 'manual'
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
