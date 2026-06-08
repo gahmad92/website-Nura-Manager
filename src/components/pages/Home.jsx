@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import Hero from '../sections/Hero'
 import Navbar from '../sections/Navbar'
+import StatsSection from '../sections/StatsSection'
 import FeaturesSection from '../sections/FeaturesSection'
 import ChatSimulation from '../sections/ChatSimulation'
 
@@ -42,22 +43,7 @@ export default function Home() {
 
       <Hero />
 
-      {/* ─── Stats Bar ─── */}
-      <section className="py-16 px-6 bg-white border-y border-[var(--color-border)]">
-        <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          {[
-            { number: '100%', label: 'Offline' },
-            { number: '0', label: 'Accounts Needed' },
-            { number: '4+', label: 'Intelligent Agents' },
-            { number: 'Free', label: 'to use' },
-          ].map((stat, i) => (
-            <motion.div key={stat.label} {...fadeUp} transition={{ duration: 0.6, delay: i * 0.1 }}>
-              <p className="stat-number gradient-text">{stat.number}</p>
-              <p className="text-sm text-[var(--color-muted)] mt-1">{stat.label}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+      <StatsSection />
 
       <FeaturesSection />
 
