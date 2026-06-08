@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import Hero from '../sections/Hero'
 import Navbar from '../sections/Navbar'
 import FeaturesSection from '../sections/FeaturesSection'
+import ChatSimulation from '../sections/ChatSimulation'
 
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
@@ -32,15 +33,6 @@ const templates = [
   { name: 'Bug Tracker', lists: 6, desc: 'Reported, Triaged, In Dev, Testing, Resolved' },
   { name: 'Personal Goals', lists: 7, desc: 'Yearly, Quarterly, Monthly, Weekly, Daily' },
   { name: 'Custom Blank', lists: 0, desc: 'Start from scratch, build your own workflow' },
-]
-
-const exampleCommands = [
-  'how many boards do we have?',
-  'show lists in board Launch',
-  'how many members do we have?',
-  'who has the least work?',
-  'who is the best performing member?',
-  'show progress for member Max',
 ]
 
 export default function Home() {
@@ -161,72 +153,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           {sectionHeader('Talk to Your App', 'Nura Chats', 'Ask questions in plain English — Nura Chat understands natural language and controls everything for you.')}
 
-          {/* Chat preview */}
-          <motion.div className="card max-w-xl mx-auto mb-10" {...fadeUp}>
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="font-bold text-[var(--color-black)]">Nura Chat</h3>
-                <span className="text-xs text-emerald-600 font-medium">Online &mdash; Local AI ready</span>
-              </div>
-            </div>
-
-            <div className="space-y-4 mb-6">
-              <div className="flex gap-3">
-                <div className="w-8 h-8 rounded-full bg-[var(--color-ginger)] flex items-center justify-center shrink-0">
-                  <span className="text-xs font-bold text-[var(--color-orange)]">AI</span>
-                </div>
-                <div className="bg-[var(--color-ginger)] rounded-r-xl rounded-t-xl px-4 py-3 max-w-[80%]">
-                  <p className="text-sm text-[var(--color-text)]">Hello! I'm your Nura Assistant. How can I help you manage your boards today?</p>
-                </div>
-              </div>
-              <div className="flex gap-3 justify-end">
-                <div className="bg-[var(--color-orange)]/10 rounded-l-xl rounded-t-xl px-4 py-3 max-w-[80%]">
-                  <p className="text-sm text-[var(--color-text)]">Create a new board called &quot;Sprint 24&quot;</p>
-                </div>
-                <div className="w-8 h-8 rounded-full gradient-bg flex items-center justify-center shrink-0">
-                  <span className="text-xs font-bold text-white">GH</span>
-                </div>
-              </div>
-              <div className="flex gap-3">
-                <div className="w-8 h-8 rounded-full bg-[var(--color-ginger)] flex items-center justify-center shrink-0">
-                  <span className="text-xs font-bold text-[var(--color-orange)]">AI</span>
-                </div>
-                <div className="bg-[var(--color-ginger)] rounded-r-xl rounded-t-xl px-4 py-3 max-w-[80%]">
-                  <p className="text-sm text-[var(--color-text)]">Done! Created board &quot;Sprint 24&quot; with Backlog, In Progress, Review, Done.</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex gap-2">
-              <input type="text" placeholder="Ask anything in plain English..." className="flex-1 bg-white border border-[var(--color-border)] rounded-lg px-4 py-2.5 text-sm outline-none focus:border-[var(--color-orange)] transition-colors" />
-              <button className="btn-primary">Send</button>
-            </div>
-          </motion.div>
-
-          {/* Example commands */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-3xl mx-auto">
-            {exampleCommands.map((cmd, i) => (
-              <motion.div
-                key={cmd}
-                className="card py-3 px-4 text-center"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: i * 0.03 }}
-              >
-                <code className="text-sm text-[var(--color-orange)]">&quot;{cmd}&quot;</code>
-              </motion.div>
-            ))}
-          </div>
-
-          <p className="text-center text-sm text-[var(--color-text-light)] mt-6">
-            Try these natural language commands in Nura Chat — your AI understands them all.
-          </p>
+          <ChatSimulation />
         </div>
       </section>
 
