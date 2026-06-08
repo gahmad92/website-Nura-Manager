@@ -3,6 +3,7 @@ import Hero from '../sections/Hero'
 import Navbar from '../sections/Navbar'
 import StatsSection from '../sections/StatsSection'
 import FeaturesSection from '../sections/FeaturesSection'
+import AgentsSection from '../sections/AgentsSection'
 import ChatSimulation from '../sections/ChatSimulation'
 
 const fadeUp = {
@@ -19,13 +20,6 @@ const sectionHeader = (tag, title, desc) => (
     {desc && <p className="section-subtitle mx-auto">{desc}</p>}
   </motion.div>
 )
-
-const agents = [
-  { name: 'Manager Agent', role: 'Manager', desc: 'Calculates member workload and highlights who is carrying the most load.', stat: 'Busiest: Haider (3.5)', color: 'bg-orange-100 text-orange-700' },
-  { name: 'Planner Agent', role: 'Planner', desc: 'Suggests improvements such as possible duplicate task warnings.', stat: '0 suggestions', color: 'bg-amber-100 text-amber-700' },
-  { name: 'Risk Agent', role: 'Risk', desc: 'Scans due dates and stale cards, then raises overdue and due-soon alerts.', stat: '5 risk cards flagged', color: 'bg-red-100 text-red-700' },
-  { name: 'Chronicler Agent', role: 'Chronicler', desc: 'Builds weekly narrative summaries from events, workload and risk data.', stat: '200 weekly events', color: 'bg-emerald-100 text-emerald-700' },
-]
 
 const templates = [
   { name: 'Scrum Sprint', lists: 12, desc: 'Backlog, In Progress, Review, Done' },
@@ -75,29 +69,7 @@ export default function Home() {
 
       {/* ─── Agents ─── */}
       <section id="agent" className="py-24 px-6">
-        <div className="max-w-6xl mx-auto">
-          {sectionHeader('AI Agents', 'Intelligence Built In', 'Four specialized agents work in the background to keep your workflow smooth and productive.')}
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {agents.map((agent, i) => (
-              <motion.div
-                key={agent.name}
-                className="feature-card text-center"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-              >
-                <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold mb-4 ${agent.color}`}>
-                  <span className="w-1.5 h-1.5 rounded-full bg-current" />
-                  {agent.role}
-                </div>
-                <h3 className="font-bold text-[var(--color-black)] mb-2">{agent.name}</h3>
-                <p className="text-sm text-[var(--color-text-light)] leading-relaxed mb-4">{agent.desc}</p>
-                <p className="text-xs font-mono text-[var(--color-orange)] bg-[var(--color-ginger)] inline-block px-2 py-0.5 rounded">{agent.stat}</p>
-              </motion.div>
-            ))}
-          </div>
+        <AgentsSection />
 
           {/* Weekly Briefing */}
           <motion.div className="card max-w-2xl mx-auto mt-10 text-center" {...fadeUp}>
@@ -131,7 +103,6 @@ export default function Home() {
               </select>
             </div>
           </motion.div>
-        </div>
       </section>
 
       {/* ─── Nura Chats / Commands ─── */}
